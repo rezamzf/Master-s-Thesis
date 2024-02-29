@@ -1,0 +1,242 @@
+--This simulation deck mainly aimed to simulate convection of CO2 into brine 
+--This simulation is based on  SPE-CASE1 (provided by Satoil- 2015)
+--and the model utilizing CO2STORE keyword in OPM-flow (provided by Carl Fredrik Berg)
+
+--Modified by: Reza Mozaffari
+
+RUNSPEC
+-- --------------------------------------------------
+
+TITLE
+ CO2 Convection into formation brine
+
+DIMENS	
+ 20 20 35 /
+
+
+TABDIMS
+ /
+
+--To utilize CO2STORE keyword DIFFUSE also should be added 
+OIL
+GAS
+DISGAS
+
+DIFFUSE
+CO2STORE
+
+--The unit for different input variables
+METRIC
+
+START
+   1 'JAN' 2023 /
+
+
+UNIFOUT
+
+
+GRID
+-- --------------------------------------------------
+
+INIT
+
+--Size of grid blocks in different directions
+DX
+	14000*0.4/
+
+DY
+	14000*0.4/
+ 
+DZ
+	1200*0.1	12800*0.4/
+
+--Depth of top for each grid block
+TOPS
+
+	400*1000 /
+
+--Value of porosity 
+PORO
+80*0.35
+160*0.38
+80*0.34
+80*0.37
+160*0.36
+80*0.35
+160*0.34
+80*0.37
+240*0.34
+80*0.36
+12800*0.38/
+	
+--Value of permeability in x-direction(mD)
+PERMX
+1200*1000
+6400*1000
+6400*2000/
+	
+
+--Value of permeability in y-direction(mD)
+PERMY	
+1200*500
+6400*1000
+6400*500/
+
+	
+
+--Value of permeability in z-direction(mD)
+PERMZ
+1200*400
+6400*300
+6400*400/
+
+
+PROPS
+-- -------------------------------------------------
+
+ROCK
+-- Rock Compressibility
+-- Ref. pressure     Compressibility
+-- -------------     ---------------
+       10.0              4E-05   /
+
+SGOF
+-- Column 1: gas saturation
+-- Column 2: gas relative permeability
+-- Column 3: oil relative permeability when oil,
+-- gas and connate water are present
+-- Column 4: oil-gas capillary pressure
+0.0	0.0	1.0 	0.025
+0.1	0.0     0.740	0.026
+0.2	0.009	0.528	0.027
+0.3	0.030	0.359	0.028
+0.4	0.070	0.230	0.030
+0.5	0.136	0.136	0.032
+0.6	0.230	0.070	0.035
+0.7	0.359	0.030	0.038
+0.8	0.528	0.009	0.044
+0.9	0.740	0.000	0.057 /
+
+SALINITY
+0.7/ 35-40g/l  -> 35-40g /kg -> 0.63-0.72 mol/g
+
+SOLUTION
+-- -------------------------------------------------
+
+EQUIL
+--Col1: Datum depth(m)
+--Col2: P @ datum depth (bar)
+--Col3: WOC depth (m)
+--Col4: Oil-water Pc @ WOC (bar)
+--Col5: GOC depth (m)
+--Col6: Gas-oil Pc @ GOC (bar)
+--Col7: RSVD table
+--Col8: RVVD table
+
+--Item:	1	2	3	4	5	6	7	8	9
+	1013.1	140	1020	0	1000.3	0	1	0	0/
+
+RSVD
+1000	0
+1010	0
+1100	0
+1128	0/
+
+
+SUMMARY
+-- -------------------------------------------------
+
+-- This keyword enable printing out all the most
+-- commonly used data.
+ALL
+
+-- This keyword enable printing out the
+-- cummulative CPU use at different time steps. 
+TCPU
+
+
+SCHEDULE
+-- -------------------------------------------------
+
+RPTSCHED
+  'DENS' /
+
+-- This keyword enable printing out restart files.
+RPTRST
+  BASIC=2 /
+
+DRSDT
+  1	ALL/
+DRSDTCON
+  99.99/
+
+TSTEP
+
+31 28 31 30 31 30 31 31 30 31 30 31 
+31 28 31 30 31 30 31 31 30 31 30 31 /
+
+DATES
+   1 'JAN' 2025 /
+   1 'JAN' 2026 /
+   1 'JAN' 2027 /
+   1 'JAN' 2028 /
+   1 'JAN' 2029 /
+   1 'JAN' 2030 /
+   1 'JAN' 2031 /
+   1 'JAN' 2032 /
+   1 'JAN' 2033 /
+   1 'JAN' 2034 /
+   1 'JAN' 2035 /
+   1 'JAN' 2036 /
+   1 'JAN' 2037 /
+   1 'JAN' 2038 /
+   1 'JAN' 2039 /
+   1 'JAN' 2040 /
+   1 'JAN' 2041 /
+   1 'JAN' 2042 /
+   1 'JAN' 2043 /
+   1 'JAN' 2044 /
+   1 'JAN' 2045 /
+   1 'JAN' 2046 /
+   1 'JAN' 2047 /
+   1 'JAN' 2048 /
+   1 'JAN' 2049 /
+   1 'JAN' 2050 /
+   1 'JAN' 2051 /
+   1 'JAN' 2052 /
+   1 'JAN' 2053 /
+   1 'JAN' 2054 /
+/
+
+DATES
+   1 'JAN' 2055 /
+   1 'JAN' 2059 /
+   1 'JAN' 2063 /
+   1 'JAN' 2067 /
+   1 'JAN' 2072 /
+   1 'JAN' 2074 /
+   1 'JAN' 2080 /
+/
+
+DATES
+   1 'JAN' 2090 /
+   1 'JAN' 2100 /
+   1 'JAN' 2110 /
+   1 'JAN' 2120 /
+   1 'JAN' 2130 /
+   1 'JAN' 2140 /
+   1 'JAN' 2150 /
+/
+DATES
+   1 'JAN' 2250 /
+   1 'JAN' 2350 /
+   1 'JAN' 2450 /
+   1 'JAN' 2550 /
+   1 'JAN' 2650 /
+   1 'JAN' 2750 /
+   1 'JAN' 2850 /
+   1 'JAN' 2950 /
+   1 'JAN' 3000 /
+/
+
+END
