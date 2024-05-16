@@ -1,2 +1,2 @@
 # Master-s-Thesis
-In this repository, all the OPM-Flow DATA files and Python codes that were utilized in my master's thesis are presented.
+This GitHub repository has been established as an additional resource accompanying my Master's thesis conducted in Autumn 2023. The project's primary objective was to scale up the CO2 dissolution process into brine, recognized as one of the most effective chemical trapping mechanisms in CO2 sequestration procedures.
