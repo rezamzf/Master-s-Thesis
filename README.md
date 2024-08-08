@@ -25,7 +25,7 @@ Although all the output files from simulations are provided in this repository, 
 
 1. **Linux systems:**
 
-   Follow the steps on the [https://opm-project.org/?page_id=245) or watch videos provided by Carl Fredrik Berg to easily set up OPM Flow on your Linux system.
+   Follow the steps on the [OPM Project webpage](https://opm-project.org/?page_id=245) or watch videos provided by Carl Fredrik Berg to easily set up OPM Flow on your Linux system.
 
 2. **Windows systems:**
 
