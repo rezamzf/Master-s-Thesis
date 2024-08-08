@@ -41,7 +41,7 @@ Although all the output files from simulations are provided in this repository, 
 
    c) Create a new VM and follow the prompts to install the Linux OS using the ISO file.
 
-   d) Once installed, follow the instructions in the video provided by Carl Fredrik Berg.
+   d) Once installed, follow the instructions in the [videos (provided by Carl Fredrik Berg)](https://www.youtube.com/watch?v=r1hL1lvwG9c&t=1s).
 
    **Windows Subsystem for Linux (WSL):**
 
