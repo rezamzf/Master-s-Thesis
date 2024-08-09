@@ -56,14 +56,25 @@ Although all the output files from simulations are provided in this repository, 
 
    c) Install a Linux distribution from the Microsoft Store (e.g., Ubuntu).
 
-   d) Once installed, follow the instructions in the video provided by Carl Fredrik Berg.
+   d) Once installed, open Ubuntu and again follow the instructions in the [video (provided by Carl Fredrik Berg)](https://www.youtube.com/watch?v=r1hL1lvwG9c&t=1s).
 
 ### ResInsight
 
-To visualize the simulation results, you need to install ResInsight. Follow the instructions on the [ResInsight website](https://resinsight.org/getting-started/download-and-install/windows-installation/) to download and install the software.
+To visualize the simulation results, you need to install ResInsight. Follow the instructions on the [ResInsight website](https://resinsight.org/getting-started/download-and-install/windows-installation/) to download and install the newest version of software either for Linux or Windows systems.
 
 ### Python
 
-Ensure Python is installed on your system. You can download it from [Python.org](https://www.python.org/downloads/). Additionally, install the necessary Python libraries using the following command:
+Ensure Python is installed on your system. You can download it from [Python.org](https://www.python.org/downloads/).
+
+To analyze and process the simulation data, the following Python libraries are essential:
+
+- **Numpy**: For numerical computations and array operations.
+- **matplotlib**: For plotting and visualizing data.
+- **pandas**: For data manipulation and analysis, particularly in tabular form.
+- **ecl2df**: A Pandas DataFrame wrapper that incorporates features from opm.io and resdata, which are excellent packages for reading result files from reservoir simulators. ecl2df includes submodules such as summary, grid, pillars, and satfunc, each designed to analyze distinct aspects of the simulation model. This package is provided by Equinor. You can find complete information about the package [here](https://equinor.github.io/res2df/).
+
+You can install these libraries by running the following command:
+
 ```sh
-pip install -r requirements.txt
+pip install numpy matplotlib pandas ecl2df
+
