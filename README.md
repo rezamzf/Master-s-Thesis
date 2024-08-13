@@ -77,7 +77,7 @@ You can install these libraries by running the following command:
 
 ```sh
 pip install numpy matplotlib pandas ecl2df
-
+```
 ## Example Input Deck
 
 Below is an example of an input deck used to simulate the CO2 dissolution process into brine. This input deck is based on SPE-CASE1 (provided by Statoil-2015) and utilizes the CO2STORE keyword in OPM Flow (provided by Carl Fredrik Berg).
