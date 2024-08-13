@@ -78,7 +78,7 @@ You can install these libraries by running the following command:
 ```sh
 pip install numpy matplotlib pandas ecl2df
 ```
-### Usage Instructions
+## Usage Instructions
 
 After installing OPM Flow, you'll need a properly configured input file (referred to as a DATA file) to simulate your model. This file includes detailed characterization of the fluid, porous media, and other parameters relevant to your simulation.
 
@@ -86,7 +86,7 @@ Below is a sample input file used in the thesis to simulate the CO2 dissolution 
 
 You can find all the input files used in the thesis in the repository. The naming convention for these DATA files indicates the differences between them, which is explained below.
 
-#### Naming Convention for Input Files
+### Naming Convention for Input Files
 
 The general format for the input file names is as follows: `2DHETA11`. Here's how to interpret it:
 
