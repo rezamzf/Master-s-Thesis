@@ -78,69 +78,110 @@ You can install these libraries by running the following command:
 ```sh
 pip install numpy matplotlib pandas ecl2df
 ```
-## Example Input Deck
+### Usage Instructions
 
-Below is an example of an input deck used to simulate the CO2 dissolution process into brine. This input deck is based on SPE-CASE1 (provided by Statoil-2015) and utilizes the CO2STORE keyword in OPM Flow (provided by Carl Fredrik Berg).
+After installing OPM Flow, you'll need a properly configured input file (referred to as a DATA file) to simulate your model. This file includes detailed characterization of the fluid, porous media, and other parameters relevant to your simulation.
+
+Below is a sample input file used in the thesis to simulate the CO2 dissolution process into brine. While this example is specific to one simulation scenario, various input files with different values for certain variables were created to achieve the desired simulation results.
+
+You can find all the input files used in the thesis in the repository. The naming convention for these DATA files indicates the differences between them, which is explained below.
+
+#### Naming Convention for Input Files
+
+The general format for the input file names is as follows: `2DHETA11`. Here's how to interpret it:
+
+- **First Two Digits (2D/3D)**: Indicates whether the model is 2D or 3D.
+- **Next Three Letters (HOM/HET)**: Specifies if the model is homogeneous (`HOM`) or heterogeneous (`HET`).
+- **Next Letter ('A')**: Denotes anisotropic conditions (only applicable in anisotropic models).
+- **Last Two Numbers**: Indicate the grid cell size and the heterogeneity condition applied to the model.
+
+**Grid Cell Sizes**:
+
+| Grid Cell Number | Grid Cell Size (m) |
+|------------------|--------------------|
+| 1                | 1.6                |
+| 2                | 0.8                |
+| 3                | 0.4                |
+| 4                | 0.2                |
+| 5                | 0.1                |
+
+**Heterogeneity Conditions**:
+
+| Condition Number | K in Layer 1 (md) | K in Layer 2 (md) | K in Layer 3 (md) |
+|------------------|-------------------|-------------------|-------------------|
+| 1                | 1000              | 2000              | 1000              |
+| 2                | 2000              | 1000              | 2000              |
+| 3                | 1000              | 1000              | 2000              |
+| 4                | 2000              | 2000              | 1000              |
+
+**Anisotropy Conditions**:
+
+| Direction | Layer 1 | Layer 2 | Layer 3 |
+|-----------|---------|---------|---------|
+| **x**     | Het. condition | Het. condition | Het. condition |
+| **y**     | 500     | 1000    | 500     |
+| **z**     | 400     | 300     | 400     |
+
+In 3D models, the structure is similar to 2D models, with consistent changes in heterogeneity and anisotropy. Notably, the grid cell size for the CO2 layer is fixed at 0.1 m in the z-direction in all cases.
+
+### Example Input Deck
+
+Below is an example of an input deck, which is a text file that OPM Flow reads to execute the simulation. This specific example simulates the CO2 dissolution into formation brine:
 
 ```plaintext
--- This simulation deck mainly aims to simulate the CO2 dissolution process into brine.
--- It is based on SPE-CASE1 (provided by Statoil-2015).
--- The model utilizes the CO2STORE keyword in OPM Flow (provided by Carl Fredrik Berg).
+--This simulation is based on SPE-CASE1 (provided by Statoil-2015)
+--and the model utilizes the CO2STORE keyword in OPM-flow (provided by Carl Fredrik Berg)
 
--- Modified by: Reza Mozaffari
+--Modified by: Reza Mozaffari
 
 RUNSPEC
 -- --------------------------------------------------
 
--- Title of the simulation
 TITLE
  CO2 Dissolution into Formation Brine
 
--- Dimensions of the simulation grid (X, Y, Z)
 DIMENS    
  1 5 11 /
 
--- Specification of the TABDIMS keyword
 TABDIMS
  /
 
--- To utilize CO2STORE, the DIFFUSE keyword must also be included
+--To utilize CO2STORE keyword, DIFFUSE should also be added 
 OIL
 GAS
 DISGAS
+
 DIFFUSE
 CO2STORE
 
--- Unit system for input variables
+--The unit for different input variables
 METRIC
 
--- Start date of the simulation
 START
    1 'JAN' 2023 /
 
--- Uniform output setting
 UNIFOUT
-
 
 GRID
 -- --------------------------------------------------
 
--- Initialization of grid parameters
 INIT
 
--- Size of grid blocks in different directions (X, Y, Z)
+--Size of grid blocks in different directions
 DX
-    55*1.6 /
+  55*1.6/
+
 DY
-    55*1.6 /
+  55*1.6/
+ 
 DZ
-    15*0.1    40*1.6 /
+  15*0.1 40*1.6/
 
--- Depth of the top of each grid block
+--Depth of top for each grid block
 TOPS
-    5*1000 /
+  5*1000 /
 
--- Porosity values for each grid block
+--Value of porosity 
 PORO
 2*0.35
 1*0.38
@@ -149,115 +190,96 @@ PORO
 3*0.36
 2*0.35
 1*0.34
-40*0.38 /
-
--- Permeability in the X direction (mD)
+40*0.38/
+    
+--Value of permeability in x-direction (mD)
 PERMX
 15*2000
 20*2000
-20*1000 /
-
--- Permeability in the Y direction (mD)
+20*1000/
+    
+--Value of permeability in y-direction (mD)
 PERMY    
 15*500
 20*1000
-20*500 /
+20*500/
 
--- Permeability in the Z direction (mD)
+--Value of permeability in z-direction (mD)
 PERMZ
 15*400
 20*300
-20*400 /
-
+20*400/
 
 PROPS
 -- -------------------------------------------------
 
--- Rock compressibility properties
 ROCK
+-- Rock Compressibility
 -- Ref. pressure     Compressibility
 -- -------------     ---------------
-       10.0              4E-05   /
+       10.0          4E-05   /
 
--- Gas-Oil relative permeability and capillary pressure functions
 SGOF
 -- Column 1: gas saturation
 -- Column 2: gas relative permeability
 -- Column 3: oil relative permeability when oil,
 -- gas and connate water are present
 -- Column 4: oil-gas capillary pressure
-0.0    0.0     1.0     0.025
-0.1    0.0     0.740   0.026
-0.2    0.009   0.528   0.027
-0.3    0.030   0.359   0.028
-0.4    0.070   0.230   0.030
-0.5    0.136   0.136   0.032
-0.6    0.230   0.070   0.035
-0.7    0.359   0.030   0.038
-0.8    0.528   0.009   0.044
-0.9    0.740   0.000   0.057 /
+0.0 0.0 1.0 0.025
+0.1 0.0 0.740 0.026
+0.2 0.009 0.528 0.027
+0.3 0.030 0.359 0.028
+0.4 0.070 0.230 0.030
+0.5 0.136 0.136 0.032
+0.6 0.230 0.070 0.035
+0.7 0.359 0.030 0.038
+0.8 0.528 0.009 0.044
+0.9 0.740 0.000 0.057 /
 
--- Salinity value
 SALINITY
-0.7/ 35-40g/l  -> 35-40g/kg -> 0.63-0.72 mol/g
-
+0.7/ 35-40g/l -> 35-40g/kg -> 0.63-0.72 mol/g
 
 SOLUTION
 -- -------------------------------------------------
 
--- Initialization of equilibrium conditions
 EQUIL
---Col1: Datum depth(m)
---Col2: P @ datum depth (bar)
---Col3: WOC depth (m)
---Col4: Oil-water Pc @ WOC (bar)
---Col5: GOC depth (m)
---Col6: Gas-oil Pc @ GOC (bar)
---Col7: RSVD table
---Col8: RVVD table
-    1013.1    140    1020    0    1000.3    0    1    0    0 /
+-- Datum depth (m) | P @ datum depth (bar) | WOC depth (m) | Oil-water Pc @ WOC (bar) | GOC depth (m) | Gas-oil Pc @ GOC (bar) | RSVD table | RVVD table
+  1013.1 140 1020 0 1000.3 0 1 0 0/
 
--- Solution Gas-Oil Ratio Data
 RSVD
-1000    0
-1010    0
-1100    0
-1128    0 /
-
+1000 0
+1010 0
+1100 0
+1128 0/
 
 SUMMARY
 -- -------------------------------------------------
 
--- Print all commonly used data
+-- Print out all commonly used data
 ALL
 
--- Print cumulative CPU usage at different time steps
+-- Print cumulative CPU usage at different time steps 
 TCPU
-
 
 SCHEDULE
 -- -------------------------------------------------
 
--- Schedule report options
 RPTSCHED
   'DENS' /
 
--- Enable printing of restart files
+-- Print out restart files
 RPTRST
   BASIC=2 /
 
--- Set reporting step intervals
 DRSDT
-  1    ALL /
+  1 ALL/
 DRSDTCON
-  99.99 /
+  99.99/
 
--- Define time steps (days per step)
 TSTEP
 31 28 31 30 31 30 31 31 30 31 30 31 
 31 28 31 30 31 30 31 31 30 31 30 31 /
 
--- Key simulation dates
 DATES
    1 'JAN' 2025 /
    1 'JAN' 2026 /
@@ -289,9 +311,7 @@ DATES
    1 'JAN' 2052 /
    1 'JAN' 2053 /
    1 'JAN' 2054 /
-/
 
--- Additional dates
 DATES
    1 'JAN' 2055 /
    1 'JAN' 2059 /
@@ -300,7 +320,6 @@ DATES
    1 'JAN' 2072 /
    1 'JAN' 2074 /
    1 'JAN' 2080 /
-/
 
 DATES
    1 'JAN' 2090 /
@@ -310,20 +329,8 @@ DATES
    1 'JAN' 2130 /
    1 'JAN' 2140 /
    1 'JAN' 2150 /
-/
 
--- Long-term simulation dates
 DATES
    1 'JAN' 2250 /
-   1 'JAN' 2350 /
-   1 'JAN' 2450 /
-   1 'JAN' 2550 /
-   1 'JAN' 2650 /
-   1 'JAN' 2750 /
-   1 'JAN' 2850 /
-   1 'JAN' 2950 /
-   1 'JAN' 3000 /
-/
+   1 '
 
--- End of the simulation
-END
