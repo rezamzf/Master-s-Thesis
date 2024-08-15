@@ -344,3 +344,9 @@ DATES
 
 END
 ```
+After creating your input file, place your `DATA` file in the appropriate directory, as demonstrated in this [video](https://www.youtube.com/watch?v=r1hL1lvwG9c&t=1s). Next, open the directory in Ubuntu's command prompt. Once you're in the directory containing your `DATA` file, you can run the simulation using the following command:
+
+```sh
+flow DATAFILE.DATA
+```
+Replace DATAFILE with the name of your specific file.
