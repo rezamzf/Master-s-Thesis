@@ -82,9 +82,9 @@ pip install numpy matplotlib pandas ecl2df
 
 After installing OPM Flow, you'll need a properly configured input file (referred to as a DATA file) to simulate your model. This file includes detailed characterization of the fluid, porous media, and other parameters relevant to your simulation.
 
-Below is a sample input file used in the thesis to simulate the CO2 dissolution process into brine. While this example is specific to one simulation scenario, various input files with different values for certain variables were created to achieve the desired simulation results.
+The following is a sample input file utilized in the thesis to simulate the process of CO2 dissolution into brine. Although this example pertains to a specific simulation scenario, a range of input files with varying approaches—such as different grid cell sizes, layering permeability, and conditions of permeability heterogeneity and anisotropy—were developed to comprehensively assess their impact and achieve the study's objectives.
 
-You can find all the input files used in the thesis in the repository. The naming convention for these DATA files indicates the differences between them, which is explained below.
+You can find all the input files used in the thesis in the repository. The naming convention for these DATA files indicates the differences between them , which is explained below.
 
 ### Naming Convention for Input Files
 
@@ -138,7 +138,7 @@ RUNSPEC
 -- --------------------------------------------------
 
 TITLE
- CO2 Dissolution into Formation Brine
+Upscaling CO2 Dissolution into Formation Brine
 
 DIMENS    
  1 5 11 /
